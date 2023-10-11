@@ -1,5 +1,11 @@
 <h1>Product List</h1>
 
+<div class="d-flex flex-row-reverse group-btn">
+  <app-forms></app-forms>
+</div>
+
+
+
 <table class="table">
   <thead>
     <tr>
@@ -11,8 +17,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products" [product]="product">
-      <th scope="row">{{ product.id }}</th>
+    <tr *ngFor="let product of products.reverse() let i = index">
+      <th scope="row">{{ i + 1 }}</th>
       <th scope="row"><img src="{{ product.image  }}" width="70px" height="60px" alt="{{ product.name }}"></th>
       <td>{{ product.name }}</td>
       <td>{{ product.price }}</td>
