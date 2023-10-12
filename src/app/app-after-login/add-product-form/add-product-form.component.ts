@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from 'src/app/models/product.model';
-import { ProductService } from 'src/app/product.service';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
-  selector: 'app-add-form',
-  templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.css'],
+  selector: 'app-add-product-form',
+  templateUrl: './add-product-form.component.html',
+  styleUrls: ['./add-product-form.component.css'],
 })
-export class AddFormComponent {
+export class AddProductFormComponent {
   @ViewChild('form') addForm: NgForm;
 
   constructor(private productService: ProductService) {}

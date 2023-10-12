@@ -1,3 +1,5 @@
+import { Category } from './category.model';
+
 export class Product {
   public name: string;
   public image: string;
