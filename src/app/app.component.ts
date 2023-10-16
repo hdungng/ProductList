@@ -10,13 +10,13 @@ import { PlaceholderDirective } from './shared/placeholder/placeholder.directive
 })
 export class AppComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
-  isAuthenticated = false;
+  isAuthenticated = true;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
+      // this.isAuthenticated = !!user;
     });
   }
 

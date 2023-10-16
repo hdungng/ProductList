@@ -22,7 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
       {
         path: 'after-login',
         component: AppAfterLoginComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         children: [
           { path: 'products', component: ProductsComponent },
           { path: 'categories', component: CategoriesComponent },
