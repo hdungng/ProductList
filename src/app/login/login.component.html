@@ -1,33 +1,24 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Cake Shop</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <h1>Login</h1>
 
+<ng-template appPlaceholder></ng-template>
+
 <form (ngSubmit)="onLogin()" #form="ngForm">
+
+    <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+
+    <div class="lds-ring d-flex" *ngIf="isLoading">
+        <div></div>
+    </div>
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="username" name="username" required ngModel #username="ngModel">
+        <span class="text-danger" *ngIf="!username.valid && username.touched">Username is not valid!</span>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" ngModel name="password" required #password="ngModel">
+        <input type="password" class="form-control" id="password" name="password" minlength="6" required ngModel
+            #password="ngModel">
+        <span class="text-danger" *ngIf="!password.valid && password.touched">Password is not valid!</span>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
 </form>
