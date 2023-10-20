@@ -4,7 +4,9 @@
 
 <form (ngSubmit)="onLogin()" #form="ngForm">
 
-    <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+    <div class="alert alert-danger" role="alert" *ngIf="!!error">
+        {{ error }}
+    </div>
 
     <div class="lds-ring d-flex" *ngIf="isLoading">
         <div></div>

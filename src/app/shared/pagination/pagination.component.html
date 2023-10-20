@@ -1,0 +1,13 @@
+<div class="pagination justify-content-center">
+    <ng-container *ngFor="let page of pagesToShow">
+        <ng-container *ngIf="page === currentPage">
+            <span class="page-link current active">{{ page }}</span>
+        </ng-container>
+        <ng-container *ngIf="page === 0">
+            <span class="page-link ellipsis">...</span>
+        </ng-container>
+        <ng-container *ngIf="page !== currentPage && page !== 0">
+            <span class="page-link" (click)="onPageChange(page)">{{ page }}</span>
+        </ng-container>
+    </ng-container>
+</div>

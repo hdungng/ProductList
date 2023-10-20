@@ -2,7 +2,6 @@ import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
-import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,6 @@ import { PlaceholderDirective } from '../shared/placeholder/placeholder.directiv
 })
 export class LoginComponent {
   @ViewChild('form') loginForm: NgForm;
-  alertHost: PlaceholderDirective;
   isLoading: boolean = false;
   error: string = null;
 
@@ -23,22 +21,24 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe(
-        (responseData) => {
+        (responseData: any) => {
           if (
             responseData.hasOwnProperty('message') &&
             responseData.hasOwnProperty('code')
           ) {
-            const message = responseData['message'];
-            const code = responseData['code'];
-            if (code != 200) {
-              this.error = message;
+            if (responseData.code != 200) {
+              console.log(responseData);
+              this.error = responseData.message;
               this.isLoading = false;
             } else {
               // redirect to page
-              this.router.navigate(['/after-login/products']);
+              const userData = responseData.data.staff;
+
+              this.authService.user.next(userData);
+              localStorage.setItem('userData', JSON.stringify(userData));
+              this.router.navigate(['/after-login/users']);
             }
           }
-          console.log(responseData);
         },
         (error) => {
           this.error = error;
@@ -47,9 +47,5 @@ export class LoginComponent {
       );
 
     this.loginForm.reset();
-  }
-
-  onHandleError() {
-    this.error = null;
   }
 }

@@ -1,0 +1,8 @@
+* {
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+.active {
+    background-color: red;
+}

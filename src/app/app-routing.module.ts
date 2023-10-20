@@ -5,6 +5,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
+  {
+    path: 'after-login',
+    loadChildren: () =>
+      import('./app-after-login/app-after-login.module').then(
+        (m) => m.AppAfterLoginModule
+      ),
+  },
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent },

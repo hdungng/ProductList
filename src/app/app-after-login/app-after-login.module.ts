@@ -1,31 +1,32 @@
 import { NgModule } from '@angular/core';
-import { CategoriesComponent } from './categories/categories.component';
-import { ProductsComponent } from './products/products.component';
-import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppAfterLoginComponent } from './app-after-login.component';
 import { AuthGuard } from '../auth/auth.guard';
-import { BrowserModule } from '@angular/platform-browser';
+import { UsersComponent } from './users/users.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  declarations: [
-    AddProductFormComponent,
-    ProductsComponent,
-    CategoriesComponent,
-    AppAfterLoginComponent,
-  ],
+  declarations: [AppAfterLoginComponent, UsersComponent, TransactionsComponent],
   imports: [
+    NgxPaginationModule,
+    CommonModule,
     FormsModule,
-    BrowserModule,
+    SharedModule,
     RouterModule.forChild([
       {
-        path: 'after-login',
+        path: '',
         component: AppAfterLoginComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         children: [
-          { path: 'products', component: ProductsComponent },
-          { path: 'categories', component: CategoriesComponent },
+          { path: 'users', component: UsersComponent },
+          {
+            path: 'transactions',
+            component: TransactionsComponent,
+          },
         ],
       },
     ]),
